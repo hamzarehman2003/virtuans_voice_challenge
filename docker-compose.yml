@@ -1,0 +1,31 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - CHROMA_PATH=chroma_db
+      - COLLECTION_NAME=sunmarke_chunks
+      - TOP_K=6
+      - MAX_CONTEXT_CHUNKS=4
+      - MAX_CHARS_PER_CHUNK=1800
+      - MIN_SIMILARITY=0.25
+      - HTTP_TIMEOUT_S=60
+      - MODEL_TIMEOUT_S=60
+      - QA_OVERALL_TIMEOUT_S=30
+    env_file:
+      - .env
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+
