@@ -21,10 +21,6 @@ htmlcov/
 .env
 .env.*
 
-# Chroma DB
-chroma_db/
-*.sqlite3
-
 # Node / frontend
 frontend/node_modules/
 frontend/dist/
