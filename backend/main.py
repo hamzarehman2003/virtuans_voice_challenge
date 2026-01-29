@@ -33,6 +33,11 @@ def create_app() -> FastAPI:
 
     app.include_router(qa_router)
     app.include_router(voice_router)
+
+    @app.get("/health")
+    def health_check():
+        return {"status": "ok"}
+
     return app
 
 
